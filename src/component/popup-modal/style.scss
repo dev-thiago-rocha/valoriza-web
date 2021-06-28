@@ -1,0 +1,61 @@
+@import '../../index.scss';
+
+.popup-modal-outside-container {
+  align-items: center;
+  background-color: rgba($color: #000000, $alpha: 0.4);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+
+  .popup-modal-container {
+    z-index: 10;
+    width: 30%;
+    min-width: 300px;
+    background-color: $thrtec-white;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    padding: 20px 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 1px solid $thrtec-gray;
+      width: 100%;
+      h2 {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 200;
+        margin: 10px 0;
+      }
+    }
+
+    .body {
+      font-family: 'Roboto', sans-serif;
+      padding: 10px 10px;
+      font-size: 14px;
+      text-align: justify;
+      p {
+        a {
+          color: $thrtec-blue;
+          text-decoration: none;
+        }
+      }
+    }
+
+    .modal-button-container {
+      margin-top: 10px;
+      .MuiButton-outlinedPrimary,
+      .MuiButton-textPrimary {
+        color: $thrtec-blue;
+        border-color: $thrtec-blue;
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+@import '../../index.scss';
+
+.header-container {
+  background-color: $thrtec-blue;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .buttons-container {
+    margin-right: 30px;
+    display: flex;
+    align-items: center;
+    button {
+      margin: 0 10px;
+      background-color: transparent;
+      border: 0;
+      color: $thrtec-white;
+      font-size: 14px;
+      font-family: 'Roboto', sans-serif;
+
+      &:hover {
+        border-bottom: 1px solid $thrtec-white;
+        cursor: pointer;
+      }
+    }
+  }
+}
