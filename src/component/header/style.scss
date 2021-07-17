@@ -1,22 +1,24 @@
 @import '../../index.scss';
 
 .header-container {
-  background-color: $thrtec-blue;
-  height: 40px;
-  display: flex;
   align-items: center;
+  background-color: $thrtec-blue;
+  display: flex;
+  height: 40px;
   justify-content: space-between;
+  position: absolute;
+  width: 100%;
   .buttons-container {
-    margin-right: 30px;
-    display: flex;
     align-items: center;
+    display: flex;
+    margin-right: 30px;
     button {
-      margin: 0 10px;
       background-color: transparent;
       border: 0;
       color: $thrtec-white;
-      font-size: 14px;
       font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      margin: 0 10px;
 
       &:hover {
         border-bottom: 1px solid $thrtec-white;

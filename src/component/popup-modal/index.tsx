@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button } from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
@@ -11,7 +10,7 @@ interface IPopupModal {
   title: string
 }
 
-function PopupModal({ isModalOpen, setIsModalOpen, text, title }: IPopupModal) {
+function PopupModal({ isModalOpen, setIsModalOpen, text, title }: IPopupModal): JSX.Element {
   function handleCloseClick() {
     setIsModalOpen(false)
   }

@@ -4,7 +4,7 @@
   background-color: $thrtec-white;
   display: flex;
   align-items: center;
-  height: 95vh;
+  height: 100%;
 
   .login-image-container {
     width: 100%;
@@ -55,13 +55,23 @@
 
     .MuiTextField-root {
       width: 80%;
-      margin-top: 15px;
+      margin-top: 5px;
     }
 
     .terms-checkbox-container {
-      margin-top: 20px;
+      margin-top: 10px;
       width: 80%;
+
+      > .required-register-field {
+        color: red;
+        &-hidden {
+          visibility: hidden;
+        }
+      }
+
       .MuiFormControlLabel-root {
+        color: $thrtec-dark-gray;
+
         .Mui-checked {
           .MuiIconButton-label {
             color: $thrtec-blue;
@@ -77,13 +87,13 @@
 
     .login-section-buttons-container {
       display: flex;
-      width: 60%;
+      width: 75%;
       align-items: center;
       justify-content: space-between;
       margin-top: 25px;
 
       @include media('<=tablet') {
-        width: 70%;
+        width: 80%;
       }
 
       .MuiButton-outlinedPrimary,
