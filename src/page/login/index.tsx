@@ -1,13 +1,24 @@
 import { useState } from 'react'
-import { Header } from '../../component'
-import { LoginInfoModal } from './components'
-import { TextField, Button, Checkbox, FormControlLabel, FormHelperText } from '@material-ui/core'
+import { Header } from 'component'
+import { LoginInfoModal, LoginPageHeaderButtons } from './components'
+import {
+  TextField,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  FormHelperText,
+  Zoom,
+} from '@material-ui/core'
+import { Alert } from '@material-ui/lab'
 import { KeyboardDatePicker } from '@material-ui/pickers'
+import { useValorizaApi } from 'hook'
+import { authenticateUser } from '../../util'
 import './style.scss'
 
 const EMPTY_SPACE = ''
 const BLANK_SPACE = ' '
 const REQUIRED_FIELD = 'Campo Obrigatório!'
+const DEFAULT_ERROR_MESSAGE = 'Ocorreu um erro, por favor verifique as informações inseridas.'
 
 function LoginPage(): JSX.Element {
   const [isModalOpen, setIsModalOpen] = useState(true)
@@ -19,14 +30,44 @@ function LoginPage(): JSX.Element {
   const [acceptTerm, setAcceptTerm] = useState(false)
   const [validateFields, setValidateFields] = useState(false)
   const [validateRegisterFields, setValidateRegisterFields] = useState(false)
+  const [errorAlert, setErrorAlert] = useState(EMPTY_SPACE)
+
+  const useValoriza = useValorizaApi()
 
   function handleLoginClick() {
     setValidateFields(true)
   }
 
-  function handleRegisterClick() {
+  function verifyFields() {
+    return (
+      emailText &&
+      passwordText &&
+      confirmPasswordText &&
+      passwordText === confirmPasswordText &&
+      birthDate &&
+      acceptTerm
+    )
+  }
+
+  async function handleRegisterClick() {
     setValidateRegisterFields(true)
-    console.log(birthDate)
+    let response: any
+
+    if (verifyFields()) {
+      response = await useValoriza.registerUser({
+        email: emailText,
+        password: passwordText,
+      })
+
+      if (response.status === 200) {
+        authenticateUser({ email: emailText, password: passwordText })
+        setErrorAlert(EMPTY_SPACE)
+      } else {
+        setErrorAlert(response.data.message || DEFAULT_ERROR_MESSAGE)
+      }
+    } else {
+      setErrorAlert(DEFAULT_ERROR_MESSAGE)
+    }
   }
 
   function renderLoginSection() {
@@ -130,7 +171,7 @@ function LoginPage(): JSX.Element {
               <Checkbox
                 color='primary'
                 inputProps={{ 'aria-label': 'secondary checkbox' }}
-                value={acceptTerm}
+                checked={acceptTerm}
                 onChange={() => setAcceptTerm(!acceptTerm)}
               />
             }
@@ -138,7 +179,7 @@ function LoginPage(): JSX.Element {
           />
           <FormHelperText
             className={`required-register-field${
-              acceptTerm && validateRegisterFields ? '-hidden' : EMPTY_SPACE
+              !acceptTerm && validateRegisterFields ? EMPTY_SPACE : '-hidden'
             }`}
           >
             {REQUIRED_FIELD}
@@ -159,9 +200,18 @@ function LoginPage(): JSX.Element {
 
   return (
     <>
-      <Header />
+      <Header buttons={LoginPageHeaderButtons} />
       <div className='login-page-container'>
         <div className='login-image-container' />
+        <Zoom in={errorAlert !== EMPTY_SPACE}>
+          <Alert
+            onClose={() => setErrorAlert(EMPTY_SPACE)}
+            severity='error'
+            className='error-alert'
+          >
+            {errorAlert}
+          </Alert>
+        </Zoom>
         {showRegisterSection ? renderRegisterSection() : renderLoginSection()}
       </div>
       <LoginInfoModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />

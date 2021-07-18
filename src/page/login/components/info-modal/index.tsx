@@ -1,4 +1,4 @@
-import { PopupModal } from '../../../../component'
+import { PopupModal } from 'component'
 import './style.scss'
 
 interface ILoginInfoModal {
