@@ -1,1 +1,16 @@
 @import '../../index.scss';
+
+.dashboard-page-container {
+  background: linear-gradient(to right, #076585, $thrtec-blue);
+  display: block;
+  min-height: 100vh;
+  height: fit-content;
+
+  > .compliments-cards-container {
+    display: flex;
+    flex-direction: row;
+    @include media('<xl-tablet') {
+      flex-direction: column;
+    }
+  }
+}
