@@ -6,6 +6,17 @@
   align-items: center;
   height: 100%;
 
+  .error-alert {
+    position: absolute;
+    z-index: 10;
+    top: 60px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+  }
+
   .login-image-container {
     width: 100%;
     height: 100%;
@@ -90,7 +101,6 @@
       width: 75%;
       align-items: center;
       justify-content: space-between;
-      margin-top: 25px;
 
       @include media('<=tablet') {
         width: 80%;
@@ -107,7 +117,7 @@
       font-size: 14px;
       font-family: 'Roboto', sans-serif;
       color: $thrtec-gray;
-      margin-top: 40px;
+      margin-top: 20px;
     }
   }
 }
